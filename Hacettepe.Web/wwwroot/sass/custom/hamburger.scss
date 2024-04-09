@@ -1,0 +1,12 @@
+.cs_logo_box {
+    display:flex;
+    align-items: center;
+    color:$black;
+    img {
+        height: 160px;
+        padding-right: 20px;
+    }
+    .brand_name{
+        diplay: block;
+    }
+}

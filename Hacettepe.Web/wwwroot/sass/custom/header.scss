@@ -1,0 +1,31 @@
+.cs_site_branding {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    img{
+        height: 80px;
+        padding-right: 1em;
+    }
+    .logo_yazi{
+        color: $black !important;
+        font-weight: bold;
+        
+        @media (max-width: 1400px) {
+            font-size: 1.1em;
+        }
+        @media (max-width: 1199px) {
+            font-size: 1.1em;
+        }
+        @media (max-width: 991px) {
+            font-size: 1.0em;
+            
+        }
+        @media (max-width: 575px) {
+            font-size: 0.9em;
+        }
+    }
+
+    @media (max-width: 575px) {
+        width: 275px;
+    }
+}
