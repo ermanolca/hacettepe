@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="/formhelper/formhelper.min.css" />
+    <script src="/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/Hacettepe.Web.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="~/css/plugins/animate.css">
+    <link rel="stylesheet" href="~/css/plugins/slick.css">
+    <link rel="stylesheet" href="~/css/plugins/odometer.css">
+    <link rel="stylesheet" href="~/css/plugins/lightgallery.min.css">
+    <link rel="stylesheet" href="~/css/plugins/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="~/css/plugins/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/plugins/select2.min.css">
+    <link rel="stylesheet" href="~/css/plugins/animated-headline.css">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <style>
+    /*Container, container body, iframe*/
+    .tox-tinymce, .tox-container-body, #code_ifr {
+        min-height: 100% !important;
+    }
+    /*Container body*/
+    .tox-container-body {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    /*Editing area*/
+    .tox-container-body .mce-edit-area {
+        position: absolute;
+        top: 69px;
+        bottom: 37px;
+        left: 0;
+        right: 0;
+    }
+    /*Footer*/
+    .tox-tinymce .mce-statusbar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Sayfalar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Menu</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Doktorlar</span></a>
+                    </li>
+                    <li><a href="#" class="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Kullanıcılar</span></a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col py-3">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/formhelper/formhelper.bundle.min.js"></script>
+<script type="text/javascript"> 
+$.validator.setDefaults({
+        errorClass: "",
+        validClass: "",
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+            $(element.form).find("[data-valmsg-for=" + element.name + "]").addClass("invalid-feedback");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+            $(element.form).find("[data-valmsg-for=" + element.name + "]").removeClass("invalid-feedback");
+        },
+    });
+    @await RenderSectionAsync("scripts", required: false)
+</script>
+
+</body>
+</html>
