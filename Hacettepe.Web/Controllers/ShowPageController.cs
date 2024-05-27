@@ -5,18 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hacettepe.Web.Controllers;
 
-public class ShowPageController : Controller
+public class ShowPageController(IMediator mediator) : Controller
 {
-    private IMediator _mediator;
-    public ShowPageController(IMediator mediator)
+    public async Task<ViewResult> ShowPage([FromRoute]string slug)
     {
-        _mediator = mediator;
-
-    }
-    
-    public async Task<ViewResult> ShowPage([FromRoute]string lang, [FromRoute]string slug)
-    {
-        var page = await _mediator.Send<Page?>(new ViewPageRequest(){Slug = slug});
+        var page = await mediator.Send<Page?>(new ViewPageRequest(){Slug = slug});
         return View(page ?? new Page());
     }   
 }

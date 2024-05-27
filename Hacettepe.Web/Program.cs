@@ -6,6 +6,7 @@ using Hacettepe.Application.Authentication;
 using Hacettepe.Application.Database;
 using Hacettepe.Web.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Localization.Routing;
 
 namespace Hacettepe.Web;
 
@@ -59,9 +60,22 @@ public class Program
             });
         });
 
+        builder.Services.AddLocalization(opts =>  opts.ResourcesPath = "Resources" );
+        
         var cultureInfo = new CultureInfo("tr-TR");
         CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
         CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+        
+        builder.Services.Configure<RequestLocalizationOptions>(options =>
+        {
+            var supportedCultures = new[]{
+                new CultureInfo("tr-TR"),
+                new CultureInfo("en-US")
+            };
+            options.SupportedCultures = supportedCultures;
+            options.SupportedUICultures = supportedCultures;
+            options.RequestCultureProviders.Insert(0, new RouteDataRequestCultureProvider());
+        });
         
         var app = builder.Build();
 
@@ -79,9 +93,8 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
-
+        app.UseRequestLocalization();
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseFormHelper();
