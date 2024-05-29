@@ -45,6 +45,16 @@
         right: 0;
     }
     </style>
+
+@* <script src="https://cdn.tiny.cloud/1/54nys3nismliwtbpujmtepqpxgy6n9qfle5vpce1fo3m0gke/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> *@
+<script>
+tinymce.init({
+  selector: '#editor',
+        plugins: 'code table lists link image',
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',
+        menubar: 'file edit view insert format tools table'
+});
+</script>
 </head>
 <body>
 <div class="container-fluid">
