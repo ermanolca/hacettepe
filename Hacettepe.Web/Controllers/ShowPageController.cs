@@ -1,4 +1,5 @@
 using Hacettepe.Application.Pages;
+using Hacettepe.Application.Pages.Get;
 using Hacettepe.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

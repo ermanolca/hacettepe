@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="~/css/plugins/select2.min.css">
     <link rel="stylesheet" href="~/css/plugins/animated-headline.css">
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <link rel="stylesheet" href="/lib/DataTables/datatables.min.css">
     <style>
     /*Container, container body, iframe*/
     .tox-tinymce, .tox-container-body, #code_ifr {
@@ -47,14 +48,6 @@
     </style>
 
 @* <script src="https://cdn.tiny.cloud/1/54nys3nismliwtbpujmtepqpxgy6n9qfle5vpce1fo3m0gke/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> *@
-<script>
-tinymce.init({
-  selector: '#editor',
-        plugins: 'code table lists link image',
-        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',
-        menubar: 'file edit view insert format tools table'
-});
-</script>
 </head>
 <body>
 <div class="container-fluid">
@@ -66,7 +59,7 @@ tinymce.init({
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
+                        <a href="/Admin/Pages/List" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Sayfalar</span>
                         </a>
                     </li>
@@ -101,7 +94,7 @@ tinymce.init({
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/formhelper/formhelper.bundle.min.js"></script>
-<script type="text/javascript"> 
+<script type ="text/javascript"> 
 $.validator.setDefaults({
         errorClass: "",
         validClass: "",
@@ -114,8 +107,7 @@ $.validator.setDefaults({
             $(element.form).find("[data-valmsg-for=" + element.name + "]").removeClass("invalid-feedback");
         },
     });
-    @await RenderSectionAsync("scripts", required: false)
 </script>
-
+@await RenderSectionAsync("scripts", required: false)
 </body>
 </html>

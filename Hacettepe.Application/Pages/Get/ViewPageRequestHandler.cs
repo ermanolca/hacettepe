@@ -1,10 +1,9 @@
 using Hacettepe.Application.Database;
-using Hacettepe.Application.Utils;
 using Hacettepe.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hacettepe.Application.Pages;
+namespace Hacettepe.Application.Pages.Get;
 
 public class ViewPageRequestHandler(HacettepeDbContext dbContext): IRequestHandler<ViewPageRequest, Page?>
 {
