@@ -1,12 +1,18 @@
 using System.Globalization;
+using System.Reflection;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using FormHelper;
 using Hacettepe.Application.Authentication;
+using Hacettepe.Application.Authentication.Infrastructure;
 using Hacettepe.Application.Database;
+using Hacettepe.Application.Mailing;
 using Hacettepe.Web.Infrastructure;
+using HGO.ASPNetCore.FileManager;
+using HGO.ASPNetCore.FileManager.ViewComponents;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization.Routing;
+using Microsoft.Extensions.FileProviders;
 
 namespace Hacettepe.Web;
 
@@ -22,21 +28,27 @@ public class Program
         
         builder.Services.AddDbContext<HacettepeDbContext>();
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-        
-        builder.Services.AddControllersWithViews().AddFormHelper(options => {
+
+        builder.Services.AddControllersWithViews().AddFormHelper(options =>
+        {
             options.CheckTheFormFieldsMessage = "Lütfen gerekli alanları doldurunuz";
             options.RedirectDelay = 6000;
             options.EmbeddedFiles = true;
             options.ToastrDefaultPosition = ToastrPosition.TopFullWidth;
-        }).AddFluentValidation();
+        });
+        
+        builder.Services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
+        builder.Services.AddFluentValidationAutoValidation();
 
         builder.Services.AddRazorPages();
+        
+        builder.Services.AddHgoFileManager();
         
         builder.Services.AddValidatorsFromAssembly(typeof(LoginRequest).Assembly);
         builder.Services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(LoginRequest).Assembly);
-            //cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
         
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -76,6 +88,11 @@ public class Program
             options.SupportedUICultures = supportedCultures;
             options.RequestCultureProviders.Insert(0, new RouteDataRequestCultureProvider());
         });
+
+        builder.Services.AddSingleton<IMailService, SmtpMailService>();
+        builder.Services.AddScoped<IUserSession, UserSession>();
+        builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+        builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         
         var app = builder.Build();
 
@@ -98,6 +115,16 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseFormHelper();
+        
+        var embeddedProvider = new EmbeddedFileProvider(typeof(FileManagerComponent)
+            .GetTypeInfo().Assembly, "HGO.ASPNetCore.FileManager.hgofilemanager");
+        
+        app.UseSession();
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            FileProvider = embeddedProvider,
+            RequestPath = new PathString("/admin/hgofilemanager")
+        });
         
         app.MapControllerRoute(
             name: "areaRoute",

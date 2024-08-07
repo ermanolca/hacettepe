@@ -5,17 +5,18 @@ using Hacettepe.Application.Pages.Get;
 using Hacettepe.Application.Pages.List;
 using Hacettepe.Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hacettepe.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-public class PagesController(IMediator mediator) : Controller
+public class PagesController(ISender mediator) : Controller
 {
     [HttpGet]
     public ViewResult Create()
     {
-        return View("Edit",new Page());
+        return View("deneme",new Page());
     }
     
     [HttpPost]

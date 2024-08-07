@@ -20,7 +20,7 @@
 						<form method="POST" asp-formhelper="true" asp-action="Login" asp-controller="Auth" class="needs-validation" novalidate="" autocomplete="off">
 							<div class="mb-3">
 								<label class="mb-2 text-muted" for="email" asp-for="Email">E-Posta</label>
-								<input id="email" type="email" class="form-control" asp-for="Email" value="@Model.Email" required autofocus>
+								<input id="email" type="email" class="form-control" asp-for="Email" value="@Model.Email" autofocus>
 								<span class="invalid-feedback" asp-validation-for="Email"></span>
 							</div>
 							<div class="mb-3">

@@ -1,4 +1,5 @@
 using Hacettepe.Application.Database;
+using Hacettepe.Application.Utils;
 using Hacettepe.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +11,9 @@ public class LoginRequestHandler(HacettepeDbContext dbContext) : IRequestHandler
     public async Task<User?> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
         var user = await dbContext.Users.SingleOrDefaultAsync(x => x.Email == request.Email, cancellationToken: cancellationToken);
-        if (user != null && user.Password == request.Password)
-        {
-            return user;
-        }
-
-        return null;
+        if (user == null) return null;
+        
+        var hashedPassword = Hasher.Hash(request.Password, user.Salt);
+        return user.Password == hashedPassword ? user : null;
     }
 }

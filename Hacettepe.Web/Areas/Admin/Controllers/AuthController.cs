@@ -1,10 +1,13 @@
 using System.Security.Claims;
-using Hacettepe.Application.Authentication;
+using Hacettepe.Application.Common;
+using Hacettepe.Application.Users.Password;
 using Hacettepe.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using LoginRequest = Hacettepe.Application.Authentication.LoginRequest;
 
 namespace Hacettepe.Web.Areas.Admin.Controllers;
 
@@ -38,7 +41,9 @@ public class AuthController: Controller
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Email, loginRequest.Email)
+            new(ClaimTypes.Email, loginRequest.Email),
+            new(ClaimTypes.Name, user.Name),
+            new(ClaimTypes.Role, user.Role.ToString()),
         };
         
         var claimsIdentity=new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -54,13 +59,50 @@ public class AuthController: Controller
         return LocalRedirect("/admin/Pages/Create/");
     }
     
+    [Route("/admin/forgotpassword")]
     [HttpGet]
+    public ViewResult ForgotPassword()
+    {
+        return View(new ForgotPasswordRequest());
+    }
+    
+    [Route("/admin/forgotpassword")]
+    [HttpPost]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest forgotPasswordRequest)
+    {
+        await _mediator.Send(forgotPasswordRequest);
+        ViewBag.Message = "Şifre yenileme isteğiniz kayıtlı eposta adresinize gönderilmiştir";
+        return View(new ForgotPasswordRequest());
+    }
+    
+    [Route("/admin/renewpassword/{token}")]
+    [HttpGet]
+    public ViewResult RenewPassword(string token)
+    {
+        return View(new RenewPasswordRequest() { Token = token});
+    }
+    
+    [Route("/admin/renewpassword")]
+    [HttpPost]
+    public async Task<IActionResult> RenewPassword(RenewPasswordRequest renewPasswordRequest)
+    {
+        var result = await _mediator.Send<HandlerResult>(renewPasswordRequest);
+        ViewBag.Message = result.Message;
+        if (result.IsSuccess)
+        {
+            return RedirectToAction("LogIn", "Auth", new { area = "Admin" });
+        }
+        
+        return View(renewPasswordRequest);
+    }
+    
+    [HttpGet]
+    [Authorize]
     [Route("/admin/logout")]
     public async Task<IActionResult> Signout(string returnUrl = null)
     {
         // Clear the existing external cookie
-        await HttpContext.SignOutAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
         return LocalRedirect("/admin/login");
     }

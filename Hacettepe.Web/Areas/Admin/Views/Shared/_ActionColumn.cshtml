@@ -1,0 +1,31 @@
+@{ var controller = ViewContext.RouteData.Values["controller"]!.ToString()?.ToLower(); }
+
+<script type="text/javascript">
+    
+    function getActionMenu(data) {
+        
+        return `<div class="dropdown text-center">
+                    <a class="btn" id="dropdown-menu-${ data.id }" data-bs-toggle="dropdown" aria-expanded="false" data-boundary="viewport" aria-haspopup="true">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-menu-${ data.id }">
+
+                        <a class="dropdown-item" href="/admin/@controller/edit/${ data.id }">
+                            <i class="fa fa-edit"></i>
+                            Güncelle
+                        </a>
+
+                        <form id="delete-${ data.id }" action="/admin/@controller/delete/${data.id}" method="post">
+                            @Html.AntiForgeryToken()
+                        </form>
+                        <a class="dropdown-item" href="#" onclick="if(confirm('Kaydı silmek istediğinizden emin misiniz?')) document.getElementById('delete-${data.id}').submit()">
+                            <i class="fa fa-trash"></i>
+                            Sil
+                        </a>
+
+                    </div>
+                </div>`;
+    }
+    
+</script>
+

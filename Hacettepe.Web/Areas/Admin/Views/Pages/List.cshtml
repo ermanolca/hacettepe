@@ -9,8 +9,7 @@
             <tr>
                 <th>Başlık</th>
                 <th>Slug</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th></th>
             </tr>
             </thead>
         </table>
@@ -34,7 +33,6 @@
                 "type": "POST",
                 "datatype": "json"
             },
-        
             "columnDefs":[
             {
                 "targets": [0],
@@ -50,11 +48,6 @@
                 "targets": [2],
                 "searchable": false,
                 "orderable": false
-            },
-            {
-                "targets": [3],
-                "searchable": false,
-                "orderable": false
             }],
             "columns": [
                   { "data": "title", "title": "Title", "name": "title", "autoWidth": true },
@@ -62,14 +55,8 @@
                   {
                       data:null,
                       "render": function (data, type, full, meta)
-                      { return '<a class="btn btn-info" href="/Admin/Pages/Edit/' + data.id + '">Güncelle</a>'; }
-                  },
-                  {
-                       data: null, 
-                       render: function (data, type, row) {
-                           return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + data.id+ "'); >Delete</a>";
-                       }
-                  },
+                        { return getActionMenu(data); }
+                  }
             ]
         });
         

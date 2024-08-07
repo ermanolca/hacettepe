@@ -1,0 +1,86 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Hacettepe.Domain.MenuItem
+
+@{
+    var title = Model.Id == 0 ? "Menu Oluşturma" : "Menu Güncelleme";
+    ViewBag.Title = title;
+    Layout = "_Layout";
+}
+<div class="row">
+    <form method="POST" asp-formhelper="true" asp-area="Admin" asp-action="Save" asp-controller="MenuItems" autocomplete="off">
+        @Html.HiddenFor(model => model.Id)
+        <div class="mb-3">
+            <label for="menuItem_name" class="form-label">Menü Adı</label>
+            <input id="menuItem_name" type="text" class="form-control" asp-for="Name" value="@Model.Name" autofocus>
+            <span class="invalid-feedback" asp-validation-for="Name"></span>
+        </div>
+        <div class="mb-3">
+            <label for="title_en" class="form-label">Türkçe Metin</label>
+            <input id="title_en" type="text" class="form-control" asp-for="Tr_Text" value="@Model.Tr_Text">
+            <span class="invalid-feedback" asp-validation-for="Tr_Text"></span>
+        </div>
+        <div class="mb-3">
+            <label for="menuItem_en_Text" class="form-label">İngilizce Metin</label>
+            <input id="menuItem_en_Text" type="text" class="form-control" asp-for="En_Text" value="@Model.En_Text">
+            <span class="invalid-feedback" asp-validation-for="En_Text"></span>
+        </div>
+        <div class="mb-3">
+            <label for="menuItem_parentId" class="form-label">Üst Menu</label>
+            <select id="menuItem_parentId" class="form-control" asp-for="ParentId" value="@Model.ParentId"></select>
+            <span class="invalid-feedback" asp-validation-for="ParentId"></span>
+        </div>
+        <div class="mb-3">
+            <label for="menuItem_tr_Url" class="form-label">Türkçe Url</label>
+            <input id="menuItem_tr_Url" type="text" class="form-control" asp-for="En_Text" value="@Model.Tr_Url">
+            <span class="invalid-feedback" asp-validation-for="Tr_Url"></span>
+        </div>
+        <div class="mb-3">
+            <label for="menuItem_en_Url" class="form-label">İngilizce Url</label>
+            <input id="menuItem_en_Url" type="text" class="form-control" asp-for="En_Text" value="@Model.En_Url">
+            <span class="invalid-feedback" asp-validation-for="En_Url"></span>
+        </div>
+        <div class="col-lg-12">
+            <div class="cs_height_18"></div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Kaydet</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $("#menuItem_parentId").select2({
+            placeholder: "Üst menü seçiniz",
+            theme: "bootstrap5",
+            allowClear: true,
+            ajax: {
+                url: "/admin/menuitems/search",
+                contentType: "application/json; charset=utf-8",
+                data: function (params) {
+                    var query =
+                    {
+                        name: params.term,
+                    };
+                    return query;
+                },
+                processResults: function (data) {
+                    var results = [];
+                    
+                     $.each(data, function (index, res) {
+                         results.push({
+                             id: res.id,
+                             text: res.name
+                         });
+                     });
+                    
+                     return {
+                         results: results
+                     };
+                }
+            }
+        });
+        
+    </script>
+}

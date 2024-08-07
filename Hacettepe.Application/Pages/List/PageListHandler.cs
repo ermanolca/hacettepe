@@ -13,7 +13,7 @@ public class PageListHandler(HacettepeDbContext dbContext) : IRequestHandler<Pag
         var data = service.GetDatatableObject(request, service.GetData());
         var response = new DatatableResponse<PageDto>()
         {
-            Data = data.Data?.Select(x=> new PageDto(){ Id = x.Id, Slug = x.Slug, Title = x.Title }).ToList(),
+            Data = data.Data?.Select(x=> new PageDto(){ Id = x.Id, Slug = x.Slug, Title = x.Title }).OrderBy(x=> x.Title).ToList(),
             Draw = request.Draw,
             RecordsFiltered = data.RecordsFiltered,
             RecordsTotal = data.RecordsTotal

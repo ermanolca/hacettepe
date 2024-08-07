@@ -1,0 +1,49 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Hacettepe.Domain.News
+
+@{
+    var title = Model.Id == 0 ? "Yeni Haber/Duyuru Oluşturma" : "Haber/Duyuru Güncelleme";
+    ViewBag.Title = title;
+    Layout = "_Layout";
+}
+<div class="row">
+    <form method="POST" asp-formhelper="true" asp-area="Admin" asp-action="Save" asp-controller="Users" autocomplete="off">
+        @Html.HiddenFor(model => model.Id)
+        <div class="mb-3">
+            <label for="title_tr" class="form-label">Türkçe Başlık</label>
+            <input id="title_tr" type="text" class="form-control" asp-for="Title_Tr" value="@Model.Title_Tr" autofocus>
+            <span class="invalid-feedback" asp-validation-for="Title_Tr"></span>
+        </div>
+        <div class="mb-3">
+            <label for="title_en" class="form-label">İngilizce Başlık</label>
+            <input id="title_en" type="text" class="form-control" asp-for="Title_En" value="@Model.Title_En">
+            <span class="invalid-feedback" asp-validation-for="Title_En"></span>
+        </div>
+        <div class="mb-3">
+            <label for="brief_Tr" class="form-label">Türkçe Özet</label>
+            <input id="brief_Tr" type="text" class="form-control" asp-for="Brief_Tr" value="@Model.Brief_En">
+            <span class="invalid-feedback" asp-validation-for="Title_Tr"></span>
+        </div>
+        <div class="mb-3">
+            <label for="brief_en" class="form-label">İngilizce Özet</label>
+            <input id="brief_en" type="text" class="form-control" asp-for="Brief_Tr" value="@Model.Brief_En">
+            <span class="invalid-feedback" asp-validation-for="Brief_En"></span>
+        </div>
+        <div class="mb-3">
+            <label for="fullTemplateId_Tr" class="form-label">Türkçe İçerik</label>
+            <select id="fullTemplateId_Tr" type="text" class="form-control" asp-for="FullTemplateId_Tr" value="@Model.FullTemplateId_Tr"></select>
+            <span class="invalid-feedback" asp-validation-for="FullTemplateId_Tr"></span>
+        </div>
+        <div class="mb-3">
+            <label for="fullTemplateId_En" class="form-label">İngilizce İçerik</label>
+            <select id="fullTemplateId_En" type="text" class="form-control" asp-for="FullTemplateId_En" value="@Model.FullTemplateId_En"></select>
+            <span class="invalid-feedback" asp-validation-for="Brief_En"></span>
+        </div>
+        <div class="col-lg-12">
+            <div class="cs_height_18"></div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Kaydet</button>
+            </div>
+        </div>
+    </form>
+</div>

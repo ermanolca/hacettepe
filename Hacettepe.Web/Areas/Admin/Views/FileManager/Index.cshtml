@@ -1,0 +1,22 @@
+@using HGO.ASPNetCore.FileManager.ViewComponentsModel
+@using HGO.ASPNetCore.FileManager
+@{
+    ViewBag.Title = "Dosya Yönetimi";
+    Layout = "_Layout";
+}
+@section header {
+    @this.RenderHgoFileManagerCss(true)
+}
+<div style="height: 550px; margin-bottom:20px">
+   @await Component.InvokeAsync("FileManagerComponent", new FileManagerModel()
+    {
+        Id = "filemanagementpage", //an application-wide unique ID
+        RootFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot", "contentfiles"), //your desired path on server
+        ApiEndPoint = Url.Action("Api"), //Url of previously created action method
+        Config = new FileManagerConfig()  {} // othe configuration 
+    })
+</div>
+@section scripts
+{
+    @this.RenderHgoFileManagerJavaScripts()
+}

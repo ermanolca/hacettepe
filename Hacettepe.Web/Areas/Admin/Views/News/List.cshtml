@@ -1,0 +1,67 @@
+@model Hacettepe.Application.Listing.DatatableResponse<Hacettepe.Application.News.List.NewsDto>
+@{
+    ViewBag.Title = "Haberler/Duyurular";
+}
+<div class="row">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-success" href="@Url.Action("Create")"><i class="bi bi-plus"></i> Yeni Haber/Duyuru</a>
+    </div>
+    <br/>
+    <table id="usersGrid" class="table table-striped table-bordered dt-responsive nowrap">
+        <thead>
+        <tr>
+            <th>Türkçe Başlık</th>
+            <th>İngilizce Başlık</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts
+{
+    <script src="/lib/DataTables/datatables.min.js"></script>
+    
+    <script type="text/javascript">
+    
+        $('#usersGrid').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+            "pageLength": 10,   
+            "stateSave": true,     
+            "ajax": {
+                "url": "/Admin/news/list",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columnDefs":[
+            {
+                "targets": [0],
+                "searchable": false,
+                "orderable": false
+            },
+            {
+                "targets": [1],
+                "searchable": false,
+                "orderable": false
+            },
+            {
+                "targets": [2],
+                "searchable": false,
+                "orderable": false
+            }],
+            "columns": [
+                { "data": "title_tr", "title": "Başlık Tr", "name": "baslik tr", "autoWidth": true },
+                { "data": "title_en", "title": "Başlık En", "name": "baslik en", "autoWidth": true },
+                {
+                    data:null,
+                    "render": function (data, type, full, meta)
+                    { return getActionMenu(data); }
+                }
+            ]
+        });
+        
+    </script>
+}
