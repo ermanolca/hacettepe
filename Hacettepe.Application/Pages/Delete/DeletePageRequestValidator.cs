@@ -1,8 +1,10 @@
 using FluentValidation;
+using Hacettepe.Application.Common;
+using Hacettepe.Domain;
 
 namespace Hacettepe.Application.Pages.Delete;
 
-public class DeletePageRequestValidator : AbstractValidator<DeletePageRequest>
+public class DeletePageRequestValidator : AbstractValidator<DeleteByIdRequest<Page>>
 {
     public DeletePageRequestValidator()
     {

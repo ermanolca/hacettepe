@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hacettepe.Domain;
 
-public class Audit
+public class Audit: IEntity
 {
     [Key]
     public int Id { get; set; }

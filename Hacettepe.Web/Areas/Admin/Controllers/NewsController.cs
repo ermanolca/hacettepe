@@ -1,7 +1,6 @@
+using Hacettepe.Application.Common;
 using Hacettepe.Application.Listing;
-using Hacettepe.Application.News.Delete;
 using Hacettepe.Application.News.Edit;
-using Hacettepe.Application.News.Get;
 using Hacettepe.Application.News.List;
 using Hacettepe.Domain;
 using MediatR;
@@ -33,7 +32,7 @@ public class NewsController(ISender mediator): Controller
     [HttpGet]
     public async Task<ViewResult> Edit(long? id)
     {
-        var news = await mediator.Send<News?>(new GetNewsByIdRequest(id ?? 0));
+        var news = await mediator.Send(new GetByIdRequest<News?>(id ?? 0));
         if (news != null) return View(news);
         
         ModelState.AddModelError("", "Kaydetme başarısız");
@@ -58,7 +57,7 @@ public class NewsController(ISender mediator): Controller
     [HttpPost]
     public async Task Delete(long? id)
     {
-        await mediator.Send(new DeleteNewsRequest() { Id = id ?? 0 });
+        await mediator.Send(new DeleteByIdRequest<News>() { Id = id ?? 0 });
         ViewBag.Message = "Silme başarılı";
     }
 }

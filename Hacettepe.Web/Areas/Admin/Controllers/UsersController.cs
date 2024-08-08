@@ -1,7 +1,6 @@
+using Hacettepe.Application.Common;
 using Hacettepe.Application.Listing;
-using Hacettepe.Application.Users.Delete;
 using Hacettepe.Application.Users.Edit;
-using Hacettepe.Application.Users.Get;
 using Hacettepe.Application.Users.List;
 using Hacettepe.Domain;
 using MediatR;
@@ -33,7 +32,7 @@ public class UsersController(ISender mediator): Controller
     [HttpGet]
     public async Task<ViewResult> Edit(long? id)
     {
-        var user = await mediator.Send<User?>(new GetUserByIdRequest(id ?? 0));
+        var user = await mediator.Send<User?>(new GetByIdRequest<User?>(id ?? 0));
         if (user != null) return View(user);
         
         ModelState.AddModelError("", "Kaydetme başarısız");
@@ -58,7 +57,7 @@ public class UsersController(ISender mediator): Controller
     [HttpPost]
     public async Task Delete(long? id)
     {
-        await mediator.Send(new DeleteUserRequest() { Id = id ?? 0 });
+        await mediator.Send(new DeleteByIdRequest<User>() { Id = id ?? 0 });
         ViewBag.Message = "Silme başarılı";
     }
 }

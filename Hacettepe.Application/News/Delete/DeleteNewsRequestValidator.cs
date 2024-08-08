@@ -1,9 +1,9 @@
 using FluentValidation;
-using Hacettepe.Application.Users.Delete;
+using Hacettepe.Application.Common;
 
 namespace Hacettepe.Application.News.Delete;
 
-public class DeleteNewsRequestValidator : AbstractValidator<DeleteUserRequest>
+public class DeleteNewsRequestValidator : AbstractValidator<DeleteByIdRequest<Domain.News>>
 {
     public DeleteNewsRequestValidator()
     {

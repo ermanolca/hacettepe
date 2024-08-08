@@ -1,11 +1,9 @@
+using Hacettepe.Application.Common;
 using Hacettepe.Application.Listing;
-using Hacettepe.Application.Pages.Delete;
 using Hacettepe.Application.Pages.Edit;
-using Hacettepe.Application.Pages.Get;
 using Hacettepe.Application.Pages.List;
 using Hacettepe.Domain;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hacettepe.Web.Areas.Admin.Controllers;
@@ -33,7 +31,7 @@ public class PagesController(ISender mediator) : Controller
     [HttpGet]
     public async Task<ViewResult> Edit(long? id)
     {
-        var page = await mediator.Send<Page?>(new GetPageByIdRequest(id ?? 0));
+        var page = await mediator.Send(new GetByIdRequest<Page?>(id ?? 0));
         if (page != null) return View(page);
         
         ModelState.AddModelError("", "Kaydetme başarısız");
@@ -58,6 +56,6 @@ public class PagesController(ISender mediator) : Controller
     [HttpDelete]
     public async Task Delete(long? id)
     {
-        await mediator.Send<DeletePageRequest>(new DeletePageRequest() {Id = id ?? 0});
+        await mediator.Send(new DeleteByIdRequest<Page>() {Id = id ?? 0});
     }
 }

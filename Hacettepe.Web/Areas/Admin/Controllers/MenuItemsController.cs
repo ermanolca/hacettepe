@@ -1,7 +1,6 @@
+using Hacettepe.Application.Common;
 using Hacettepe.Application.Listing;
-using Hacettepe.Application.MenuItems.Delete;
 using Hacettepe.Application.MenuItems.Edit;
-using Hacettepe.Application.MenuItems.Get;
 using Hacettepe.Application.MenuItems.List;
 using Hacettepe.Domain;
 using MediatR;
@@ -33,7 +32,7 @@ public class MenuItemsController(ISender mediator): Controller
     [HttpGet]
     public async Task<ViewResult> Edit(long? id)
     {
-        var menuItem = await mediator.Send<MenuItem?>(new GetMenuItemByIdRequest(id ?? 0));
+        var menuItem = await mediator.Send<MenuItem?>(new GetByIdRequest<MenuItem?>(id ?? 0));
         if (menuItem != null) return View(menuItem);
         
         ModelState.AddModelError("", "Kaydetme başarısız");
@@ -66,7 +65,7 @@ public class MenuItemsController(ISender mediator): Controller
     [HttpPost]
     public async Task Delete(long? id)
     {
-        await mediator.Send(new DeleteMenuItemRequest() { Id = id ?? 0 });
+        await mediator.Send(new DeleteByIdRequest<MenuItem>() { Id = id ?? 0 });
         ViewBag.Message = "Silme başarılı";
     }
 }

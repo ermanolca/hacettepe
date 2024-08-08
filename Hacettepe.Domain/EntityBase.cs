@@ -13,7 +13,7 @@ public interface IEntityBase
     public bool? IsDeleted { get; set; }
 }
 
-public class EntityBase : IEntityBase
+public class EntityBase : IEntityBase, IEntity
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }

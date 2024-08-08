@@ -1,9 +1,10 @@
 using FluentValidation;
-using Hacettepe.Application.Users.Delete;
+using Hacettepe.Application.Common;
+using Hacettepe.Domain;
 
 namespace Hacettepe.Application.MenuItems.Delete;
 
-public class DeleteMenuItemRequestValidator : AbstractValidator<DeleteUserRequest>
+public class DeleteMenuItemRequestValidator : AbstractValidator<DeleteByIdRequest<MenuItem>>
 {
     public DeleteMenuItemRequestValidator()
     {
