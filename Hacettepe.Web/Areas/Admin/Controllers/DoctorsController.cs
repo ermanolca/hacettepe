@@ -21,7 +21,7 @@ public class DoctorsController(ISender mediator): Controller
     [HttpPost]
     public async Task<ViewResult> Save(SaveDoctorRequest saveDoctorRequest)
     {
-        var doctor = await mediator.Send<User?>(saveDoctorRequest);
+        var doctor = await mediator.Send<Doctor?>(saveDoctorRequest);
         if (doctor != null) return View("Edit", doctor);
         
         ModelState.AddModelError("", "Kaydetme başarısız");
