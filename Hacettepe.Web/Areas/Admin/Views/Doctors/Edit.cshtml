@@ -1,0 +1,74 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Hacettepe.Application.Doctors.Edit.SaveDoctorRequest;
+
+@{
+    var title = Model.Id == 0 ? "Yeni Doctor Oluşturma" : "Doctor Güncelleme";
+    ViewBag.Title = title;
+    Layout = "_Layout";
+}
+<div class="row">
+    <form method="POST" asp-formhelper="true" asp-area="Admin" asp-action="Save" asp-controller="Users" autocomplete="off">
+        @Html.HiddenFor(model => model.Id)
+        <div class="mb-3">
+            <label for="doctor_name" class="form-label">Adı</label>
+            <input id="doctor_name" type="text" class="form-control" asp-for="Name" value="@Model.Name" autofocus>
+            <span class="invalid-feedback" asp-validation-for="Name"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_email" class="form-label">E-Posta</label>
+            <input id="doctor_email" type="text" class="form-control" asp-for="Name" value="@Model.Email" autofocus>
+            <span class="invalid-feedback" asp-validation-for="Email"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_tel" class="form-label">Telefon</label>
+            <input id="doctor_tel" type="text" class="form-control" asp-for="Tel" value="@Model.Tel" autofocus>
+            <span class="invalid-feedback" asp-validation-for="Tel"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_image" class="form-label">Resim Url</label>
+            <input id="doctor_image" type="text" class="form-control" asp-for="ImageUrl" value="@Model.ImageUrl" autofocus>
+            <span class="invalid-feedback" asp-validation-for="ImageUrl"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_unvan_tr" class="form-label">Ünvan Türkçe</label>
+            <input id="doctor_unvan_tr" type="text" class="form-control" asp-for="Unvan_Tr" value="@Model.Unvan_Tr">
+            <span class="invalid-feedback" asp-validation-for="Unvan_Tr"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_unvan_en" class="form-label">Ünvan İngilizce</label>
+            <input id="doctor_unvan_en" type="text" class="form-control" asp-for="Unvan_En" value="@Model.Unvan_En">
+            <span class="invalid-feedback" asp-validation-for="Unvan_En"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_bolum_tr" class="form-label">Bölüm Türkçe</label>
+            <input id="doctor_bolum_tr" type="text" class="form-control" asp-for="Bolum_Tr" value="@Model.Bolum_Tr">
+            <span class="invalid-feedback" asp-validation-for="Bolum_Tr"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_bolum_en" class="form-label">Bölüm İngilizce</label>
+            <input id="doctor_bolum_en" type="text" class="form-control" asp-for="Bolum_En" value="@Model.Bolum_En">
+            <span class="invalid-feedback" asp-validation-for="Bolum_En"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_uzman_tr" class="form-label">Uzmanlık Türkçe</label>
+            <input id="doctor_uzman_tr" type="text" class="form-control" asp-for="Unvan_Tr" value="@Model.Unvan_Tr">
+            <span class="invalid-feedback" asp-validation-for="Unvan_Tr"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_uzman_en" class="form-label">Uzmanlık İngilizce</label>
+            <input id="doctor_uzman_en" type="text" class="form-control" asp-for="Unvan_En" value="@Model.Unvan_En">
+            <span class="invalid-feedback" asp-validation-for="Unvan_En"></span>
+        </div>
+        <div class="mb-3">
+            <label for="doctor_uzman_en" class="form-label">Uzmanlık İngilizce</label>
+            <input id="doctor_uzman_en" type="text" class="form-control" asp-for="Unvan_En" value="@Model.Unvan_En">
+            <span class="invalid-feedback" asp-validation-for="Unvan_En"></span>
+        </div>
+        <div class="col-lg-12">
+            <div class="cs_height_18"></div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Kaydet</button>
+            </div>
+        </div>
+    </form>
+</div>

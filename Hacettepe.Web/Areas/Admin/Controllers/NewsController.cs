@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hacettepe.Web.Areas.Admin.Controllers;
 
-
 [Area("Admin")]
 public class NewsController(ISender mediator): Controller
 {

@@ -3,10 +3,8 @@ using Hacettepe.Application.Authentication.Infrastructure;
 using Hacettepe.Application.Database.Maps;
 using Hacettepe.Application.Utils;
 using Hacettepe.Domain;
-using Hacettepe.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium;
 
 namespace Hacettepe.Application.Database;
 public class HacettepeDbContext : DbContext
@@ -40,19 +38,19 @@ public class HacettepeDbContext : DbContext
     
     public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
-        //ChangeTracker.SetAuditProperties(_currentUserService);
+        ChangeTracker.SetAuditProperties(_currentUserService);
         return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
     
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
     {
-        //ChangeTracker.SetAuditProperties(_currentUserService);
+        ChangeTracker.SetAuditProperties(_currentUserService);
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
     
     public override int SaveChanges()
     {
-        //ChangeTracker.SetAuditProperties(_currentUserService);
+        ChangeTracker.SetAuditProperties(_currentUserService);
         return base.SaveChanges();
     }
     

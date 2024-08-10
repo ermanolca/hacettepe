@@ -1,0 +1,113 @@
+@model Hacettepe.Application.Listing.DatatableResponse<Hacettepe.Application.Doctors.List.DoctorDto>
+@{
+    ViewBag.Title = "Doktorlar";
+}
+<div class="row">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-success" href="@Url.Action("Create")"><i class="bi bi-plus"></i> Yeni Doktor</a>
+    </div>
+    <br/>
+    <table id="doctorsGrid" class="table table-striped table-bordered dt-responsive nowrap">
+        <thead>
+        <tr>
+            <th>Adı</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Bolum Tr</th>
+            <th>Bolum En</th>
+            <th>Unvan Tr</th>
+            <th>Unvan En</th>
+            <th>Uzmanlık Tr</th>
+            <th>Uzmanlık En</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts
+{
+    <script src="/lib/DataTables/datatables.min.js"></script>
+    
+    <script type="text/javascript">
+    
+        $('#doctorsGrid').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": true, // for disable multiple column at once
+            "pageLength": 10,   
+            "stateSave": true,     
+            "ajax": {
+                "url": "/admin/doctors/list",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columnDefs":[
+            {
+                "targets": [0],
+                "searchable": false,
+                "orderable": false
+            },
+            {
+                "targets": [1],
+                "searchable": false,
+                "orderable": false
+            },
+            {
+                "targets": [2],
+                "searchable": false,
+                "orderable": false
+            },{
+                 "targets": [3],
+                 "searchable": false,
+                 "orderable": false
+             },
+             {
+                 "targets": [4],
+                 "searchable": false,
+                 "orderable": false
+             },
+             {
+                 "targets": [5],
+                 "searchable": false,
+                 "orderable": false
+             },{
+                 "targets": [6],
+                 "searchable": false,
+                 "orderable": false
+             },
+             {
+                 "targets": [7],
+                 "searchable": false,
+                 "orderable": false
+             },
+             {
+                 "targets": [8],
+                 "searchable": false,
+                 "orderable": false
+             },{
+                 "targets": [9],
+                 "searchable": false,
+                 "orderable": false
+             }],
+            "columns": [
+                { "data": "name", "title": "Adı", "name": "name", "autoWidth": true },
+                { "data": "email", "title": "Email", "name": "email", "autoWidth": true },
+                { "data": "tel", "title": "Tel", "name": "tel", "autoWidth": true },
+                { "data": "bolum_Tr", "title": "Bölüm Tr", "name": "bolum_Tr", "autoWidth": true },
+                { "data": "bolum_En", "title": "Bölüm En", "name": "bolum_En", "autoWidth": true },
+                { "data": "unvan_Tr", "title": "Unvan Tr", "name": "unvan_Tr", "autoWidth": true },
+                { "data": "unvan_En", "title": "Unvan En", "name": "unvan_En", "autoWidth": true },
+                { "data": "uzmanlık_Tr", "title": "Uzmanlik Tr", "name": "uzmanlık_Tr", "autoWidth": true },
+                { "data": "uzmanlik_En", "title": "Uzmanlik En", "name": "uzmanlil_En", "autoWidth": true },
+                {
+                    data:null,
+                    "render": function (data, type, full, meta)
+                    { return getActionMenu(data); }
+                }
+            ]
+        });
+        
+    </script>
+}
