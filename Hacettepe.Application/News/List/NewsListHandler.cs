@@ -12,7 +12,7 @@ public class NewsListHandler(HacettepeDbContext dbContext) : IRequestHandler<New
         var data = service.GetDatatableObject(request, service.GetData());
         var response = new DatatableResponse<NewsDto>()
         {
-            Data = data.Data?.Select(x=> new NewsDto(){ Id = x.Id, Title_Tr = x.Title_Tr, Title_En = x.Title_En }).ToList(),
+            Data = data.Data?.Select(x=> new NewsDto(){ Id = x.Id, Title_Tr = x.Title, Title_En = x.Title }).ToList(),
             Draw = request.Draw,
             RecordsFiltered = data.RecordsFiltered,
             RecordsTotal = data.RecordsTotal

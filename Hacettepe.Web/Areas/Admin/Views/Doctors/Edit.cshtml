@@ -15,55 +15,26 @@
             <span class="invalid-feedback" asp-validation-for="Name"></span>
         </div>
         <div class="mb-3">
-            <label for="doctor_email" class="form-label">E-Posta</label>
-            <input id="doctor_email" type="text" class="form-control" asp-for="Name" value="@Model.Email" autofocus>
-            <span class="invalid-feedback" asp-validation-for="Email"></span>
-        </div>
-        <div class="mb-3">
-            <label for="doctor_tel" class="form-label">Telefon</label>
-            <input id="doctor_tel" type="text" class="form-control" asp-for="Tel" value="@Model.Tel" autofocus>
-            <span class="invalid-feedback" asp-validation-for="Tel"></span>
-        </div>
-        <div class="mb-3">
             <label for="doctor_image" class="form-label">Resim Url</label>
             <input id="doctor_image" type="text" class="form-control" asp-for="ImageUrl" value="@Model.ImageUrl" autofocus>
             <span class="invalid-feedback" asp-validation-for="ImageUrl"></span>
         </div>
         <div class="mb-3">
-            <label for="doctor_unvan_tr" class="form-label">Ünvan Türkçe</label>
-            <input id="doctor_unvan_tr" type="text" class="form-control" asp-for="Unvan_Tr" value="@Model.Unvan_Tr">
-            <span class="invalid-feedback" asp-validation-for="Unvan_Tr"></span>
+            <label for="doctor_title" class="form-label">Ünvan</label>
+            <input id="doctor_title" type="text" class="form-control" asp-for="Title" value="@Model.Title">
+            <span class="invalid-feedback" asp-validation-for="Title"></span>
         </div>
         <div class="mb-3">
-            <label for="doctor_unvan_en" class="form-label">Ünvan İngilizce</label>
-            <input id="doctor_unvan_en" type="text" class="form-control" asp-for="Unvan_En" value="@Model.Unvan_En">
-            <span class="invalid-feedback" asp-validation-for="Unvan_En"></span>
+            <label for="doctor_department" class="form-label">Bölüm</label>
+            <input id="doctor_department" type="text" class="form-control" asp-for="Department" value="@Model.Department">
+            <span class="invalid-feedback" asp-validation-for="Department"></span>
         </div>
         <div class="mb-3">
-            <label for="doctor_bolum_tr" class="form-label">Bölüm Türkçe</label>
-            <input id="doctor_bolum_tr" type="text" class="form-control" asp-for="Bolum_Tr" value="@Model.Bolum_Tr">
-            <span class="invalid-feedback" asp-validation-for="Bolum_Tr"></span>
+            <label for="doctor_specialty" class="form-label">Uzmanlık</label>
+            <input id="doctor_specialty" type="text" class="form-control" asp-for="Specialty" value="@Model.Specialty">
+            <span class="invalid-feedback" asp-validation-for="Specialty"></span>
         </div>
-        <div class="mb-3">
-            <label for="doctor_bolum_en" class="form-label">Bölüm İngilizce</label>
-            <input id="doctor_bolum_en" type="text" class="form-control" asp-for="Bolum_En" value="@Model.Bolum_En">
-            <span class="invalid-feedback" asp-validation-for="Bolum_En"></span>
-        </div>
-        <div class="mb-3">
-            <label for="doctor_uzman_tr" class="form-label">Uzmanlık Türkçe</label>
-            <input id="doctor_uzman_tr" type="text" class="form-control" asp-for="Unvan_Tr" value="@Model.Unvan_Tr">
-            <span class="invalid-feedback" asp-validation-for="Unvan_Tr"></span>
-        </div>
-        <div class="mb-3">
-            <label for="doctor_uzman_en" class="form-label">Uzmanlık İngilizce</label>
-            <input id="doctor_uzman_en" type="text" class="form-control" asp-for="Unvan_En" value="@Model.Unvan_En">
-            <span class="invalid-feedback" asp-validation-for="Unvan_En"></span>
-        </div>
-        <div class="mb-3">
-            <label for="doctor_uzman_en" class="form-label">Uzmanlık İngilizce</label>
-            <input id="doctor_uzman_en" type="text" class="form-control" asp-for="Unvan_En" value="@Model.Unvan_En">
-            <span class="invalid-feedback" asp-validation-for="Unvan_En"></span>
-        </div>
+        <div id="gjs"></div>
         <div class="col-lg-12">
             <div class="cs_height_18"></div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -72,3 +43,5 @@
         </div>
     </form>
 </div>
+
+@Html.RenderPartialAsync("_Editor")

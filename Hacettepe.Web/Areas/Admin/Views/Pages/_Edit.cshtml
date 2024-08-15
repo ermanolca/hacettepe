@@ -8,8 +8,9 @@
 }
 <h2 class="cs_fs_40 cs_medium mb-0">@title</h2>
 <div class="row">
-  <form method="POST" asp-formhelper="true" asp-area="Admin" asp-action="Save" asp-controller="Pages" class="needs-validation" autocomplete="off">
+  <form method="POST" asp-forxmhelper="true" asp-area="Admin" asp-action="Save" asp-controller="Pages" class="needs-validation" autocomplete="off">
     @Html.HiddenFor(model=>model.Id)
+    @Html.HiddenFor(model=>model.Content, new {id="page_content"})
     <div class="col-lg-12">
       <label class="cs_input_label cs_heading_color">Sayfa Başlığı</label>
       <input id="title" type="text" class="form-control" asp-for="Title" value="@Model.Title" required autofocus>
@@ -22,8 +23,7 @@
     </div>
     <div class="col-lg-12">
       <label class="cs_input_label cs_heading_color">Sayfa İçeriği</label>
-      <textarea asp-for="Content_TR" id="editor" class="form-control rounded-lg w-full h-full"  placeholder="Sayfa içerği"></textarea>
-      <span class="invalid-feedback" asp-validation-for="Slug"></span>
+      <div id="gjs"></div>
     </div>
     <div class="col-lg-12">
       <div class="cs_height_18"></div>

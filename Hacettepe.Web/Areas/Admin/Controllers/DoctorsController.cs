@@ -42,17 +42,11 @@ public class DoctorsController(ISender mediator): Controller
             var modelView = new SaveDoctorRequest()
             {
                 Name = doctor.Name,
-                Bolum_En = doctor.Bolum_En,
-                Bolum_Tr = doctor.Bolum_Tr,
-                Email = doctor.Email,
+                Title = doctor.Title,
+                Department = doctor.Department,
+                Specialty = doctor.Specialty,
                 ImageUrl = doctor.ImageUrl,
-                Tel = doctor.Tel,
-                TemplateId_En = doctor.TemplateId_En,
-                TemplateId_Tr = doctor.TemplateId_Tr,
-                Unvan_En = doctor.Unvan_En,
-                Unvan_Tr = doctor.Unvan_Tr,
-                Uzman_En = doctor.Uzman_En,
-                Uzman_Tr = doctor.Uzman_Tr
+                Content = doctor.Content
             };
             
             return View(modelView);

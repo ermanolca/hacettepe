@@ -16,7 +16,7 @@ public class SavePageRequestHandler(HacettepeDbContext dbContext): IRequestHandl
         if (page != null)
         {
             page.Title = request.Title;
-            page.Content_TR = request.Content_TR;
+            page.Content = request.Content;
             page.Slug = request.Slug;
             dbContext.Pages.Update(page);
         }
@@ -25,7 +25,7 @@ public class SavePageRequestHandler(HacettepeDbContext dbContext): IRequestHandl
             page = new Page()
             {
                 Title = request.Title,
-                Content_TR = request.Content_TR,
+                Content = request.Content,
                 Slug = request.Slug
             };
             page = (await dbContext.Pages.AddAsync(page, cancellationToken)).Entity;

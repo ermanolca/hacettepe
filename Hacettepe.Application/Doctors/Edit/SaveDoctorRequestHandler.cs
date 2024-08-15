@@ -17,17 +17,12 @@ public class SaveDoctorRequestHandler(HacettepeDbContext dbContext): IRequestHan
         else
         {
             doctor.Name = request.Name;
-            doctor.Bolum_En = request.Bolum_En;
-            doctor.Bolum_Tr = request.Bolum_Tr;
-            doctor.Email = request.Email;
+            doctor.Department = request.Department;
             doctor.ImageUrl = request.ImageUrl;
-            doctor.Tel = request.Tel;
-            doctor.TemplateId_En = request.TemplateId_En;
-            doctor.TemplateId_Tr = request.TemplateId_Tr;
-            doctor.Unvan_En = request.Unvan_En;
-            doctor.Unvan_Tr = request.Unvan_Tr;
-            doctor.Uzman_En = request.Uzman_En;
-            doctor.Uzman_Tr = request.Uzman_Tr;
+            doctor.Content = request.Content;
+            doctor.Title = request.Title;
+            doctor.Specialty = request.Specialty;
+            doctor.Language = request.Language;
             dbContext.Doctors.Update(doctor);
         }
         
@@ -40,17 +35,12 @@ public class SaveDoctorRequestHandler(HacettepeDbContext dbContext): IRequestHan
         var doctor = new Doctor()
         {
             Name = request.Name,
-            Bolum_En = request.Bolum_En,
-            Bolum_Tr = request.Bolum_Tr,
-            Email = request.Email,
+            Department = request.Department,
             ImageUrl = request.ImageUrl,
-            Tel = request.Tel,
-            TemplateId_En = request.TemplateId_En,
-            TemplateId_Tr = request.TemplateId_Tr,
-            Unvan_En = request.Unvan_En,
-            Unvan_Tr = request.Unvan_Tr,
-            Uzman_En = request.Uzman_En,
-            Uzman_Tr = request.Uzman_Tr
+            Content = request.Content,
+            Title = request.Title,
+            Specialty = request.Specialty,
+            Language = request.Language
         };
 
         await dbContext.Doctors.AddAsync(doctor, cancellationToken);

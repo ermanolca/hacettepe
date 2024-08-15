@@ -9,7 +9,7 @@ public class SavePageRequest : IRequest<Page>
     
     public string Title { get; set; }
     
-    public string Content_TR { get; set; }
+    public string Content { get; set; }
 
     public string Slug { get; set; }
 }

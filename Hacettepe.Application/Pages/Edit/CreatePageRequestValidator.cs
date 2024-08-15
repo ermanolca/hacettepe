@@ -9,7 +9,7 @@ public class CreatePageRequestValidator : AbstractValidator<SavePageRequest>
         RuleFor(x => x.Title).NotNull()
             .NotEmpty().WithMessage("Lütfen geçerli bir sayfa başlığı giriniz");
 
-        RuleFor(x => x.Content_TR).NotNull()
+        RuleFor(x => x.Content).NotNull()
             .NotEmpty().WithMessage("Lütfen bir içerik giriniz");
     }
 }
